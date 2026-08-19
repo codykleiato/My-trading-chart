@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My TradingView Chart</title>
+    <!-- Load the TradingView Lightweight Charts library from a CDN -->
+    <script src="https://unpkg.com"></script>
+    <style>
+        body { margin: 0; padding: 20px; background-color: #131722; color: white; font-family: sans-serif; }
+        #chart-container { width: 100%; height: 500px; }
+        h1 { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>My Live GitHub TradingView Chart</h1>
+    <div id="chart-container"></div>
+
+    <script>
+        // 1. Create the chart container with dark mode styling
+        const chartOptions = { 
+            layout: { textColor: '#d1d4dc', background: { type: 'solid', color: '#131722' } },
+            grid: { vertLines: { color: 'rgba(42, 46, 57, 0.5)' }, horzLines: { color: 'rgba(42, 46, 57, 0.5)' } }
+        };
+        const container = document.getElementById('chart-container');
+        const chart = LightweightCharts.createChart(container, chartOptions);
+
+        // 2. Add a candlestick series to the chart
+        const candlestickSeries = chart.addCandlestickSeries({
+            upColor: '#26a69a', downColor: '#ef5350', borderVisible: false,
+            wickUpColor: '#26a69a', wickDownColor: '#ef5350',
+        });
+
+        // 3. Provide sample price data (Year 2026 example)
+        const data = [
+            { time: '2026-08-10', open: 100.00, high: 105.00, low: 98.00, close: 103.50 },
+            { time: '2026-08-11', open: 103.50, high: 106.00, low: 102.00, close: 105.00 },
+            { time: '2026-08-12', open: 105.00, high: 108.00, low: 104.00, close: 107.20 },
+            { time: '2026-08-13', open: 107.20, high: 107.50, low: 101.00, close: 102.10 },
+            { time: '2026-08-14', open: 102.10, high: 104.00, low: 100.50, close: 103.90 },
+            { time: '2026-08-17', open: 103.90, high: 110.00, low: 103.00, close: 109.50 },
+            { time: '2026-08-18', open: 109.50, high: 112.00, low: 108.50, close: 111.10 }
+        ];
+
+        candlestickSeries.setData(data);
+
+        // 4. Make the chart responsive to screen resizing
+        window.addEventListener('resize', () => {
+            chart.resize(container.clientWidth, 500);
+        });
+    </script>
+</body>
+</html>
